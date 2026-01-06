@@ -8,10 +8,10 @@ WORKDIR /app
 RUN pip install uv
 
 # Copy the project metadata
-COPY pyproject.toml uv.lock ./
+COPY pyproject.toml ./
 
 # Install dependencies into system Python
-RUN uv pip install --system -r uv.lock
+RUN uv pip install --system .
 
 # Copy source code
 COPY src ./src
