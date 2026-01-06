@@ -17,9 +17,12 @@ jobs:
         with:
           python-version: "3.14"
 
-      - name: Install dependencies
+      - name: Create virtual environment
+        run: uv venv
+
+      - name: Activate venv and install dependencies
         run: |
-          pip install uv
+          source .venv/bin/Activate
           uv pip install -e .
           uv pip install pytest pyright mkdocs mkdocs-material mkdocstrings[python]
 
