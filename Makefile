@@ -1,8 +1,7 @@
 .PHONY: notes
 	@echo "Notice: MAKEFILE has to be run in the order it's in, so everything will work properly
 
-.PHONY: install lint typecheck test docs server
-
+.PHONY: install # lint typecheck test docs server
 install: ## Install the virtual environment and install the pre-commit hooks
 	@echo "🚀 Creating virtual environment using uv"
 	@uv sync
