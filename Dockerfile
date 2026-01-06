@@ -4,11 +4,10 @@ FROM python:3.12-slim
 WORKDIR /app
 
 # Install uv
-# COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 RUN pip install uv
 
 # Copy the project metadata
-COPY pyproject.toml ./
+COPY pyproject.toml README.md ./
 
 # Install dependencies into system Python
 RUN uv pip install --system .
