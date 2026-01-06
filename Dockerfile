@@ -9,8 +9,8 @@ WORKDIR /app
 COPY uv.lock /app/uv.lock
 COPY pyproject.toml /app/pyproject.toml
 
-# Install dependencies
-RUN pip install uv && uv pip; install -e .
+# Install dependencies (inside docker, mostly want system install not a venv
+RUN pip install uv && uv pip install --system -e .
 
 RUN uv sync --frozen --no-install-project
 
@@ -20,7 +20,13 @@ COPY . /app
 # Sync the project
 RUN uv sync --frozen
 
-RUN uv pip install pytest mkdocs mkdocs-material mkdocstrings[python]
+# Same as above, so here:
+RUN uv pip install --system -e . \
+    pytest \
+    pyright \
+    mkdocs \
+    mkdocs-material \
+    mkdocstrings[python]
 
 # CMD [ "python", "e2/foo.py" ]
 CMD ["uv", "run", "pytest"]
