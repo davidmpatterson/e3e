@@ -15,7 +15,7 @@ RUN uv pip install --system .
 # Copy source code
 COPY src ./src
 
-# Install your project (non-editable)
+# Install your project (non-editable - no '-e')
 RUN uv pip install --system .
 
 # Copy tests and docs
