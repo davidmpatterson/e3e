@@ -53,4 +53,4 @@ jobs:
         run: docker build -t my-app .
 
       - name: Run tests inside container
-        run: docker run my-app ./run-tests.sh
+        run: docker run my-app
