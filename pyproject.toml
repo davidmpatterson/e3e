@@ -1,5 +1,5 @@
 [project]
-name = "e2"
+name = "e3"
 version = "0.0.1"
 description = "This is a template repository for Python projects that use uv for their dependency management."
 authors = [{ name = "David Patterson", email = "davidmpatterson0@gmail.com" }]
@@ -19,9 +19,9 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://davidmpatterson.github.io/e2/"
-Repository = "https://github.com/davidmpatterson/e2"
-Documentation = "https://davidmpatterson.github.io/e2/"
+Homepage = "https://davidmpatterson.github.io/e3e/"
+Repository = "https://github.com/davidmpatterson/e3e"
+Documentation = "https://davidmpatterson.github.io/e3e/"
 
 [dependency-groups]
 dev = [
@@ -42,7 +42,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/e2"]
+packages = ["src/e3"]
 
 [tool.ty.environment]
 python = "./.venv"
@@ -108,4 +108,3 @@ skip_empty = true
 [tool.coverage.run]
 branch = true
 source = ["src"]
-

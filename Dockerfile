@@ -10,6 +10,8 @@ COPY uv.lock /app/uv.lock
 COPY pyproject.toml /app/pyproject.toml
 
 # Install dependencies
+RUN pip install uv && uv pip; install -e .
+
 RUN uv sync --frozen --no-install-project
 
 # Copy the project into the image
@@ -18,4 +20,7 @@ COPY . /app
 # Sync the project
 RUN uv sync --frozen
 
-CMD [ "python", "e2/foo.py" ]
+RUN uv pip install pytest mkdocs mkdocs-material mkdocstrings[python]
+
+# CMD [ "python", "e2/foo.py" ]
+CMD ["uv", "run", "pytest"]

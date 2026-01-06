@@ -1,21 +1,19 @@
-site_name: e2
-repo_url: https://github.com/davidmpatterson/e2
-site_url: https://davidmpatterson.github.io/e2
+site_name: e3 Documentation
+
+repo_url: https://github.com/davidmpatterson/e3
+
+site_url: https://davidmpatterson.github.io/e3
+
 site_description: This is a template repository for Python projects that use uv for their dependency management.
+
 site_author: David Patterson
+
 edit_uri: edit/main/docs/
-repo_name: davidmpatterson/e2
+
+repo_name: davidmpatterson/e3
+
 copyright: Maintained by <a href="https://davidmpatterson.com">davidmpatterson</a>.
 
-nav:
-  - Home: index.md
-  - Modules: modules.md
-plugins:
-  - search
-  - mkdocstrings:
-      handlers:
-        python:
-          paths: ["src/e2"]
 theme:
   name: material
   feature:
@@ -38,12 +36,28 @@ theme:
   icon:
     repo: fontawesome/brands/github
 
+nav:
+  - Home: index.md
+  - API Reference: modules.md
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: ["src"]
+          options:
+            show_source: true
+            show_root_heading: true
+            show_signature: true
+            docstring_style: google
+
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/davidmpatterson/e2
+      link: https://github.com/davidmpatterson/e3
     - icon: fontawesome/brands/python
-      link: https://pypi.org/project/e2
+      link: https://pypi.org/project/e3
 
 markdown_extensions:
   - toc:

@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Install dependencies
+        run: |
+          pip install uv
+          uv pip install -e .
+          uv pip install pytest pyright mkdocs mkdocs-material mkdocstrings[python]
+
+      - name: Lint with Ruff
+        run: uv run ruff check .
+
+      - name: Type check with Pyright
+        run: uv run pyright
+
+      - name: Run tests
+        run: uv run pytest
+
+      - name: Build docs
+        run: uv run mkdocs build --strict
+
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: docker build -t my-app .
+
+      - name: Run tests inside container
+        run: docker run my-app ./run-tests.sh

@@ -1,4 +1,4 @@
-from e2.foo import foo
+from e3.foo import foo
 
 
 def test_foo():
