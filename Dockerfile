@@ -10,7 +10,10 @@ COPY uv.lock /app/uv.lock
 COPY pyproject.toml /app/pyproject.toml
 
 # Install dependencies (inside docker, mostly want system install not a venv
-RUN pip install uv && uv pip install --system -e .
+# 'uv pip install...' cannot work during a Docker build
+# Editable installs ( -e . ) are for development, NOT containers
+# Use a normal install (remove '-e'):
+RUN pip install uv && uv pip install --system .
 
 RUN uv sync --frozen --no-install-project
 
@@ -21,7 +24,7 @@ COPY . /app
 RUN uv sync --frozen
 
 # Same as above, so here:
-RUN uv pip install --system -e . \
+RUN uv pip install --system . \
     pytest \
     pyright \
     mkdocs \
