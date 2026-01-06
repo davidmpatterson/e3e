@@ -1,21 +1,28 @@
-# Install uv
 FROM python:3.12-slim
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 
 # Change the working directory to the `app` directory
 WORKDIR /app
 
-# Copy the lockfile and `pyproject.toml` into the image
-COPY uv.lock /app/uv.lock
+# Install uv
+# COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
+RUN pip install uv
+
+# Copy the `pyproject.toml` and the lockfile into the image
 COPY pyproject.toml /app/pyproject.toml
+COPY uv.lock /app/uv.lock
 
 # Install dependencies (inside docker, mostly want system install not a venv
 # 'uv pip install...' cannot work during a Docker build
 # Editable installs ( -e . ) are for development, NOT containers
 # Use a normal install (remove '-e'):
-RUN pip install uv && uv pip install --system .
+# No project install yet)
+RUN uv sync --system --frozen --no-install-project
 
-RUN uv sync --frozen --no-install-project
+# Copy source code
+COPY src ./src
+
+# Install your project:
+RUN uv pip install --system .
 
 # Copy the project into the image
 COPY . /app
